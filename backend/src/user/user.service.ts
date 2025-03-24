@@ -4,7 +4,7 @@ import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
-  private users = Array.from({ length: 100 }, (_, id) => ({
+  private users = Array.from({ length: 1000000 }, (_, id) => ({
     id,
     name: faker.person.firstName(),
     surname: faker.person.lastName(),
@@ -12,8 +12,8 @@ export class UserService {
     email: faker.internet.email(),
   }));
 
-  public getUsers() {
-    return this.users;
+  public getUsers(offset: number, limit: number) {
+    return this.users.slice(offset, offset + limit);
   }
 
   public updateUser(id: string, dto: UserDto) {

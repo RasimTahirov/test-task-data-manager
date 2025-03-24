@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 
@@ -7,8 +7,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  getUsers() {
-    return this.userService.getUsers();
+  getUsers(@Query('offset') offset: string, @Query('limit') limit: string) {
+    return this.userService.getUsers(Number(offset), Number(limit));
   }
 
   @Put(':id')
