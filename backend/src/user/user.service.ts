@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -13,5 +14,17 @@ export class UserService {
 
   public getUsers() {
     return this.users;
+  }
+
+  public updateUser(id: string, dto: UserDto) {
+    const userId = Number(id);
+    const user = this.users.find((user) => user.id === userId);
+
+    if (!user) throw new NotFoundException();
+
+    Object.seal(user);
+    Object.assign(user, dto);
+
+    return user;
   }
 }
