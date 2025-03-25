@@ -1,47 +1,20 @@
 'use client'
 
-import { getUser, updateUser } from "@/api/api";
-import { AppDispatch } from "@/store/store";
-import { IUser } from "@/types/type";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { getUsers } from "@/api/api";
+import useUserMenu from "@/hooks/useUserMenu";
+import { AppDispatch, RootState } from "@/store/store";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
-  const [users, setUsers] = useState<IUser[]>([])
-  const [userMenu, setUserMenu] = useState<IUser | null>(null)
   const dispatch = useDispatch<AppDispatch>()
 
+  const users = useSelector((state: RootState) => state.users.users)
+  const { userMenu, handleOpenMenu, handleChange, handleSubmit } = useUserMenu()
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      const data = await getUser(0, 20)
-      setUsers(data)
-    }
-
-    fetchUsers()
-  }, [])
-
-  const handleOpenMenu = (id: number) => {
-    const user = users.find((user) => user.id === id)
-    if (user) {
-      setUserMenu(user)
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (userMenu) {
-      console.log(e.target.name);
-      console.log(e.target.value);
-
-      setUserMenu({ ...userMenu, [e.target.name]: e.target.value });
-    }
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (userMenu) {
-      dispatch(updateUser({ id: userMenu.id, userData: userMenu }));
-    }
-  };
+    dispatch(getUsers({ offset: 0, limit: 20 }))
+  }, [dispatch])
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import { updateUser } from "@/api/api";
+import { getUsers, updateUser } from "@/api/api";
 import { IUser } from "@/types/type";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -19,12 +19,16 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (bulider) => {
-    bulider.addCase(updateUser.fulfilled, (state, action) => {
-      state.loading = false;
-      state.users = state.users.map((user) =>
-        user.id === action.payload.id ? action.payload : user
-      );
-    });
+    bulider
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.users = action.payload;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = state.users.map((user) =>
+          user.id === action.payload.id ? action.payload : user
+        );
+      });
   },
 });
 
