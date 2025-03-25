@@ -12,8 +12,8 @@ export class UserService {
     email: faker.internet.email(),
   }));
 
-  public getUsers(offset: number, limit: number) {
-    return this.users.slice(offset, offset + limit);
+  public getUsers(limit: number) {
+    return this.users.slice(0, limit);
   }
 
   public updateUser(id: string, dto: UserDto) {

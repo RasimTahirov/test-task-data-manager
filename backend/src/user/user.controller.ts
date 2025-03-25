@@ -7,8 +7,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  getUsers(@Query('offset') offset: string, @Query('limit') limit: string) {
-    return this.userService.getUsers(Number(offset), Number(limit));
+  getUsers(@Query('limit') limit: string) {
+    return this.userService.getUsers(Number(limit));
   }
 
   @Put(':id')
