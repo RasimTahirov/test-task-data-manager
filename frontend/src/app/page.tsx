@@ -12,7 +12,7 @@ import useScroll from '@/hooks/useScroll';
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
 
-  const users = useSelector((state: RootState) => state.users.users);
+  const users = useSelector((state: RootState) => state.users.users)
   const limit = useSelector((state: RootState) => state.users.limit)
 
   const { userMenu, handleOpenMenu, handleChange, handleSubmit } = useUserMenu();

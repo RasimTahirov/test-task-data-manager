@@ -1,9 +1,10 @@
 'use client'
 
 import { Roboto } from "next/font/google";
-import "../styles/globals.css";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
+
+import "../styles/globals.css";
 
 const roboto = Roboto({
   weight: ['400', '500'],

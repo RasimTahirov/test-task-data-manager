@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const useUserMenu = () => {
-  const users = useSelector((state: RootState) => state.users.users);
   const dispatch = useDispatch<AppDispatch>()
+  const users = useSelector((state: RootState) => state.users.users);
   const [userMenu, setUserMenu] = useState<IUser | null>(null);
 
   const handleOpenMenu = (id: number) => {
