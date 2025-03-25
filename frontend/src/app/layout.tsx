@@ -1,18 +1,14 @@
 'use client'
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "../styles/globals.css";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const roboto = Roboto({
+  weight: ['400', '500'],
+  subsets: ['cyrillic', 'latin'],
+  display: 'swap'
 });
 
 export default function RootLayout({
@@ -23,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Provider store={store}>
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <body className={roboto.className}>
           {children}
         </body>
       </Provider>

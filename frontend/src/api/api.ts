@@ -2,27 +2,12 @@ import { IUser } from "@/types/type";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// export const getUser = async (offset: number, limit: number) => {
-//   try {
-//     const res = await axios.get("http://localhost:7000/user", {
-//       params: {
-//         offset: offset,
-//         limit: limit,
-//       },
-//     });
-//     return res.data;
-//   } catch {
-//     console.log("Ошибка");
-//   }
-// };
-
 export const getUsers = createAsyncThunk(
   "getUsers",
-  async ({ offset, limit }: { offset: number; limit: number }) => {
+  async ({ limit }: { limit: number }) => {
     try {
       const res = await axios.get(`http://localhost:7000/user`, {
         params: {
-          offset: offset,
           limit: limit,
         },
       });
